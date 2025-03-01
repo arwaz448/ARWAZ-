@@ -1,16 +1,39 @@
 body {
-    background-color: black;
-    color: white;
-    text-align: center;
     font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #121212;
+    color: white;
+    padding: 20px;
 }
 
-h1 {
-    color: yellow;
-    font-size: 3rem;
-    text-shadow: 3px 3px 10px rgba(255, 255, 0, 0.8);
+textarea {
+    width: 90%;
+    height: 100px;
+    font-size: 18px;
+    padding: 10px;
+    border: 2px solid #ff9800;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin-top: 10px;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e68900;
 }
 
 p {
-    font-size: 1.5rem;
-}
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+    }
