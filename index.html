@@ -3,72 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stylish Text Generator</title>
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            padding: 20px; 
-            background-color: #121212; 
-            color: white;
-        }
-        textarea { 
-            width: 90%; 
-            height: 100px; 
-            font-size: 18px; 
-            border: 2px solid #ffcc00; 
-            border-radius: 10px;
-            padding: 10px;
-            background: #222;
-            color: white;
-        }
-        button { 
-            padding: 10px 20px; 
-            font-size: 18px; 
-            margin-top: 10px; 
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background: #ffcc00;
-            color: black;
-            font-weight: bold;
-        }
-        p { 
-            font-size: 24px; 
-            font-weight: bold; 
-            margin-top: 20px; 
-            background: linear-gradient(45deg, #ff00ff, #00ffff);
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3);
-        }
-    </style>
+    <title>स्टाइलिश टेक्स्ट जनरेटर</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>✨ स्टाइलिश टेक्स्ट जनरेटर ✨</h1>
     <textarea id="inputText" placeholder="यहाँ टेक्स्ट डालें..."></textarea><br>
-    <button onclick="makeStylish()">स्टाइलिश बनाएं</button>
-    <button onclick="copyText()">कॉपी करें</button>
-    <p id="outputText"></p>
+    <button onclick="generateStylishText()">स्टाइलिश बनाएं</button>
+    <div id="outputContainer"></div>
 
     <script>
-        function makeStylish() {
-            let text = document.getElementById("inputText").value;
-            if(text.trim() === "") {
+        const fancyFonts = [
+            text => `𝓢𝓽𝔂𝓵𝓲𝓼𝓱 ${text}`,  // Cursive Style
+            text => `𝐒𝐭𝐲𝐥𝐢𝐬𝐡 ${text}`,  // Bold Style
+            text => `𝕊𝕥𝕪𝕝𝕚𝕤𝕙 ${text}`,  // Double-struck Style
+            text => `𝔖𝔱𝔶𝔩𝔦𝔰𝔥 ${text}`,  // Fraktur Style
+            text => `𝙎𝙩𝙮𝙡𝙞𝙨𝙝 ${text}`,  // Monospace Style
+            text => `Ⓢⓣⓨⓛⓘⓢⓗ ${text}`,  // Circled Style
+            text => `🆂🆃🆈🅻🅸🆂🅷 ${text}`,  // Square Style
+            text => `𝒮𝓉𝓎𝓁𝒾𝓈𝒽 ${text}`,  // Fancy Script Style
+            text => `ֆȶʏʟɨֆɦ ${text}`,  // Fancy Small Caps
+            text => `s̷t̷y̷l̷i̷s̷h̷ ${text}`,  // Strikethrough Style
+            text => text.split('').join('✨'),  // Emoji separator
+            text => `🔥${text}🔥`,  // Fire effect
+            text => text.toUpperCase(), // Uppercase text
+            text => `💖 ${text.split('').join(' ')} 💖`, // Heart spacing
+            text => `【${text}】`, // Brackets style
+            text => text.replace(/./g, char => char + ' '), // Spaced letters
+        ];
+
+        function generateStylishText() {
+            let text = document.getElementById("inputText").value.trim();
+            if (text === "") {
                 alert("कृपया पहले टेक्स्ट डालें!");
                 return;
             }
-            let stylishText = text.split('').join('✨'); // Example Style
-            document.getElementById("outputText").innerText = stylishText;
+
+            let outputContainer = document.getElementById("outputContainer");
+            outputContainer.innerHTML = ""; // पहले का आउटपुट हटाएं
+
+            fancyFonts.forEach(styleFunc => {
+                let styledText = styleFunc(text);
+                let outputDiv = document.createElement("div");
+                outputDiv.className = "output-style";
+                outputDiv.innerHTML = `<span>${styledText}</span> <button class="copy-btn" onclick="copyText('${styledText}')">📋</button>`;
+                outputContainer.appendChild(outputDiv);
+            });
         }
 
-        function copyText() {
-            let outputText = document.getElementById("outputText").innerText;
-            if(outputText.trim() === "") {
-                alert("कोई टेक्स्ट नहीं है कॉपी करने के लिए!");
-                return;
-            }
-            navigator.clipboard.writeText(outputText).then(() => {
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
                 alert("✅ टेक्स्ट कॉपी हो गया!");
             });
         }
