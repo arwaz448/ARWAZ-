@@ -3,25 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stylish Text</title>
+    <title>Stylish Text Generator</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        textarea { width: 90%; height: 100px; font-size: 18px; }
-        button { padding: 10px 20px; font-size: 18px; margin-top: 10px; }
-        p { font-size: 22px; font-weight: bold; margin-top: 20px; }
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 20px; 
+            background-color: #121212; 
+            color: white;
+        }
+        textarea { 
+            width: 90%; 
+            height: 100px; 
+            font-size: 18px; 
+            border: 2px solid #ffcc00; 
+            border-radius: 10px;
+            padding: 10px;
+            background: #222;
+            color: white;
+        }
+        button { 
+            padding: 10px 20px; 
+            font-size: 18px; 
+            margin-top: 10px; 
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #ffcc00;
+            color: black;
+            font-weight: bold;
+        }
+        p { 
+            font-size: 24px; 
+            font-weight: bold; 
+            margin-top: 20px; 
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3);
+        }
     </style>
 </head>
 <body>
-    <h1>स्टाइलिश टेक्स्ट जनरेटर</h1>
+    <h1>✨ स्टाइलिश टेक्स्ट जनरेटर ✨</h1>
     <textarea id="inputText" placeholder="यहाँ टेक्स्ट डालें..."></textarea><br>
     <button onclick="makeStylish()">स्टाइलिश बनाएं</button>
+    <button onclick="copyText()">कॉपी करें</button>
     <p id="outputText"></p>
 
     <script>
         function makeStylish() {
             let text = document.getElementById("inputText").value;
+            if(text.trim() === "") {
+                alert("कृपया पहले टेक्स्ट डालें!");
+                return;
+            }
             let stylishText = text.split('').join('✨'); // Example Style
             document.getElementById("outputText").innerText = stylishText;
+        }
+
+        function copyText() {
+            let outputText = document.getElementById("outputText").innerText;
+            if(outputText.trim() === "") {
+                alert("कोई टेक्स्ट नहीं है कॉपी करने के लिए!");
+                return;
+            }
+            navigator.clipboard.writeText(outputText).then(() => {
+                alert("✅ टेक्स्ट कॉपी हो गया!");
+            });
         }
     </script>
 </body>
